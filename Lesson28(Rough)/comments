@@ -1,0 +1,9 @@
+        /* API - Application Programming Interface
+        A layer where two programs meet
+        Front End (FE) - User Interface
+        Back End (BE) - Server
+        Protocol - rules of communication (Bluetooth, Web,...)
+            HTTP - (Hypertext Transfer Protocol) - how browser understands data coming from the BE.
+                Request - response (if response is 200s = good, 400s = bad, 500s = error)
+         */
+

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <canvas id="mazeCanvas"></canvas>
+  <script>
+    let length = 0;
+    let blockSize = 50;
+    let maze = [];
+    let ctx;
+    let canvas;
+
+    function drawMaze() {
+      console.log(length);
+      for (let i = 0; i < length; i++) {
+        for (let j = 0; j < length; j++) {
+          if (maze[j][i] == 1) {
+            drawBlock(i, j)
+          }
+        }
+      }
+    }
+
+    function drawBlock(x, y) {
+        const hue = ((x + y) * 5 % 30) + 270;
+      const color = `hsl(${hue}, 75%, 35%)`;
+      ctx.fillStyle = color;
+      ctx.fillRect(x * blockSize, y * blockSize, blockSize, blockSize);
+    }
+
+    async function createMaze() {
+      const post = await fetch("http://localhost:8080/draw").then((res) => res.json());
+      console.log(post);
+      length = post.length;
+      canvas = document.getElementById('mazeCanvas');
+      ctx = canvas.getContext("2d");
+      canvas.width = length * blockSize;
+      canvas.height = length * blockSize;
+      maze = post;
+      drawMaze();
+      return maze;
+    }
+    createMaze();
+  </script>
+</body>
+
+</html>
